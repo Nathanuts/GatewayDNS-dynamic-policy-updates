@@ -1,0 +1,32 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "sia-rdns-worker",
+	"main": "src/index.js",
+	"compatibility_date": "2026-01-31",
+	"observability": {
+		"enabled": true
+	},
+	"triggers": {
+		"crons": [
+			"* * * * *"
+		]
+	},
+	"kv_namespaces": [
+		{
+			"binding": "AIRCRAFT_STATE",
+			"id": "de5b620388a04a48b05e75d34d84ed8b",
+			"preview_id": "045584b834fb42bfb15e684cf9153229"
+		}
+	]
+	/**
+	 * Secrets (set via `wrangler secret put` or .dev.vars for local dev):
+	 *   FR24_API_KEY      — Flightradar24 API key
+	 *   OPENCAGE_API_KEY  — OpenCage reverse geocoding API key
+	 *   CF_ACCOUNT_ID     — Cloudflare account ID (for Gateway Lists API)
+	 *   CF_API_TOKEN      — Cloudflare API token with Gateway edit permissions
+	 */
+}
